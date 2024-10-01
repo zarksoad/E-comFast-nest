@@ -32,3 +32,5 @@ To run the server, use the following command:
 
 ```bash
 npm run start:dev
+
+$ npm i --save @nestjs/config
