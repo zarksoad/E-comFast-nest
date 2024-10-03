@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
 
 export class CreateProductDto {
   @IsString({ message: 'it should be a  string' })
@@ -6,6 +6,7 @@ export class CreateProductDto {
   name: string;
 
   @IsNumber()
+  @IsPositive({ message: 'price should be a positive number' })
   @IsNotEmpty()
   price: number;
 
@@ -14,6 +15,7 @@ export class CreateProductDto {
   description: string;
 
   @IsNumber()
+  @IsPositive({ message: 'stock must be a non-negative integer' })
   @IsNotEmpty({ message: 'it should be empty' })
   stock: number;
 }

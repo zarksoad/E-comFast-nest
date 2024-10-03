@@ -2,16 +2,21 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { CreateProductService } from './services/createProduct/create-product.service';
+import { FindAllProducts } from './services/getAllProducts/get-all-products.service';
 
 @Injectable()
 export class ProductsService {
-  constructor(private readonly createProductService: CreateProductService) {}
+  constructor(
+    private readonly createProductService: CreateProductService,
+    private readonly findAllProducts: FindAllProducts,
+  ) {}
+
   async create(createProductDto: CreateProductDto) {
     return await this.createProductService.createProduct(createProductDto);
   }
 
-  findAll() {
-    return `This action returns all products`;
+  async findAll() {
+    return await this.findAllProducts.findAllProducts();
   }
 
   findOne(id: number) {
