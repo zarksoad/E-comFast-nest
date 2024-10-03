@@ -3,12 +3,14 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { CreateProductService } from './services/createProduct/create-product.service';
 import { FindAllProducts } from './services/getAllProducts/get-all-products.service';
+import { DeleteProductService } from './services/deleteProduct/delete.product.service';
 
 @Injectable()
 export class ProductsService {
   constructor(
     private readonly createProductService: CreateProductService,
     private readonly findAllProducts: FindAllProducts,
+    private readonly deleteProductService: DeleteProductService,
   ) {}
 
   async create(createProductDto: CreateProductDto) {
@@ -27,7 +29,7 @@ export class ProductsService {
     return `This action updates a #${id} product`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async remove(productId: number): Promise<void> {
+    await this.deleteProductService.deleteProduct(productId);
   }
 }
